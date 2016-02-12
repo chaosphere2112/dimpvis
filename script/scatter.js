@@ -15,11 +15,6 @@ function scatterplot(container, data, xattr, yattr) {
 		yattr = "y";
 	}
 
-	/*
-	<button id="playpause">Play</button>
-	<input id="time_slide" type="range" value="0" min="0" step="1" />
-	*/
-
 	var time_length = data.reduce(function(previousValue, currentValue) {
 		if (previousValue === null) {
 			return currentValue.length;
@@ -35,7 +30,7 @@ function scatterplot(container, data, xattr, yattr) {
 	}
 
 	var playpause = container.append("button")
-			 .attr("class", "playpause")
+			 .attr("class", "playpause btn")
 			 .text("Play")
 			 .on("click", function(){
 			 	var playing = interval != null;
