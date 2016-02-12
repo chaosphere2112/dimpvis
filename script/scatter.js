@@ -1,4 +1,4 @@
-function scatterplot(container, data, xattr, yattr) {
+function scatterplot(container, data, trace, xattr, yattr) {
 	var margin = {top: 20, right: 20, bottom: 30, left: 40},
 	timetick = 100,
 	width = 960 - margin.left - margin.right,
@@ -22,11 +22,25 @@ function scatterplot(container, data, xattr, yattr) {
 			return previousValue > currentValue.length ? currentValue.length : previousValue;
 		}
 	}, null);
-
 	function update() {
+		var time;
 		dots.transition().delay(timetick / 2)
-		.attr("cx", function(d) { return x_scale(d[get_time()].x)})
-		.attr('cy', function(d) { return y_scale(d[get_time()].y)});
+			.attr("cx", function(d) { return x_scale(d[get_time()].x)})
+			.attr('cy', function(d) { return y_scale(d[get_time()].y)});
+		
+		var target = svg;
+		for (time = 1; time < get_time(); time++) {
+			svg.selectAll(".tracer.time_" + time).data(data).enter()
+				.append("line")
+				.attr('class', function(d, i) { return "tracer data_" + i + " time_" + time; })
+				.attr('x1', function(d) { return x_scale(d[time - 1].x)})
+				.attr('x2', function(d) { return x_scale(d[time].x)})
+				.attr('y1', function(d) { return y_scale(d[time - 1].y)})
+				.attr("y2", function(d) { return y_scale(d[time].y)});
+		}
+		if (get_time() == 0) {
+			svg.selectAll(".tracer").remove();
+		}
 	}
 
 	var playpause = container.append("button")
@@ -114,7 +128,7 @@ function scatterplot(container, data, xattr, yattr) {
 					.data(points)
 					.enter().append("circle")
 					.attr("class", "scatter-dot")
-					.attr("r", 3.5)
+					.attr("r", 10)
 					.attr("cx", function(d) { return x_scale(d[get_time()][xattr])})
 					.attr('cy', function(d) { return y_scale(d[get_time()][yattr])});
 
