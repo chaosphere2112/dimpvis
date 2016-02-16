@@ -28,18 +28,20 @@ function scatterplot(container, data, trace, xattr, yattr) {
 			.attr("cx", function(d) { return x_scale(d[get_time()].x)})
 			.attr('cy', function(d) { return y_scale(d[get_time()].y)});
 		
-		var target = svg;
-		for (time = 1; time < get_time(); time++) {
-			svg.selectAll(".tracer.time_" + time).data(data).enter()
-				.append("line")
-				.attr('class', function(d, i) { return "tracer data_" + i + " time_" + time; })
-				.attr('x1', function(d) { return x_scale(d[time - 1].x)})
-				.attr('x2', function(d) { return x_scale(d[time].x)})
-				.attr('y1', function(d) { return y_scale(d[time - 1].y)})
-				.attr("y2", function(d) { return y_scale(d[time].y)});
-		}
-		if (get_time() == 0) {
-			svg.selectAll(".tracer").remove();
+		if (trace) {
+			var target = svg;
+			for (time = 1; time < get_time(); time++) {
+				svg.selectAll(".tracer.time_" + time).data(data).enter()
+					.append("line")
+					.attr('class', function(d, i) { return "tracer data_" + i + " time_" + time; })
+					.attr('x1', function(d) { return x_scale(d[time - 1].x)})
+					.attr('x2', function(d) { return x_scale(d[time].x)})
+					.attr('y1', function(d) { return y_scale(d[time - 1].y)})
+					.attr("y2", function(d) { return y_scale(d[time].y)});
+			}
+			if (get_time() == 0) {
+				svg.selectAll(".tracer").remove();
+			}
 		}
 	}
 
