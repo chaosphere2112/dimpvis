@@ -1,3 +1,7 @@
+function distance(a, b) {
+	return Math.pow(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2), .5);
+}
+
 function scatterplot(container, data, trace, xattr, yattr) {
 	var margin = {top: 20, right: 20, bottom: 30, left: 40},
 	timetick = 100,
@@ -125,6 +129,7 @@ function scatterplot(container, data, trace, xattr, yattr) {
 	svg.append("g")
 		.attr("class", "y axis")
 		.call(y_axis);
+	var dragging = null;
 
 	var dots = svg.selectAll(".scatter-dot")
 					.data(points)
@@ -132,6 +137,42 @@ function scatterplot(container, data, trace, xattr, yattr) {
 					.attr("class", "scatter-dot")
 					.attr("r", 10)
 					.attr("cx", function(d) { return x_scale(d[get_time()][xattr])})
-					.attr('cy', function(d) { return y_scale(d[get_time()][yattr])});
+					.attr('cy', function(d) { return y_scale(d[get_time()][yattr])})
+					.on("mousedown", function(d) {
+						console.log("starting drag");
+						dragging = d;
+						d3.event.preventDefault();
+					})
+	d3.select("body").on("mouseup", function() { dragging = null; });
 
+	svg.on("mousemove", function(d, i){
+			if (dragging === null) {
+				return;
+			}
+			d3.event.preventDefault();
+			var position = d3.mouse(svg[0][0]);
+			position = {
+				x: x_scale.invert(position[0]),
+				y: y_scale.invert(position[1])
+			};
+			
+			var closest_point = dragging.reduce(function(prev, cur){
+				var cur_distance = distance(position, cur);
+				var prev_distance;
+				if (prev !== null) {
+					prev_distance = distance(position, prev);
+					if (prev_distance < cur_distance) {
+						return prev;
+					} else {
+						return cur;
+					}
+				} else {
+					return cur;
+				}
+			}, null);
+			var closest_time = dragging.indexOf(closest_point);
+			console.log(closest_time);
+			set_time(closest_time);
+			update();
+		});
 }
