@@ -138,12 +138,17 @@ function scatterplot(container, data, trace, xattr, yattr) {
 					.attr("r", 10)
 					.attr("cx", function(d) { return x_scale(d[get_time()][xattr])})
 					.attr('cy', function(d) { return y_scale(d[get_time()][yattr])})
-					.on("mousedown", function(d) {
-						console.log("starting drag");
+					.on("mousedown", function(d, i) {
+						this.setAttribute('fill-opacity', "80%");
 						dragging = d;
 						d3.event.preventDefault();
 					})
-	d3.select("body").on("mouseup", function() { dragging = null; });
+	d3.select("body").on("mouseup", function() {
+		dragging = null;
+		dots.each(function(d, i) {
+			this.setAttribute('fill-opacity', null);
+		})
+	});
 
 	svg.on("mousemove", function(d, i){
 			if (dragging === null) {
