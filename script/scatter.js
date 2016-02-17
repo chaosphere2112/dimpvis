@@ -130,6 +130,13 @@ function scatterplot(container, data, trace, xattr, yattr) {
 		.attr("class", "y axis")
 		.call(y_axis);
 	var dragging = null;
+	var path = svg.append("g")
+				.append("path");
+	
+	var path_func = d3.svg.line()
+					  .x(function(d) { return x_scale(d.x); })
+					  .y(function(d) { return y_scale(d.y); })
+					  .interpolate("linear");
 
 	var dots = svg.selectAll(".scatter-dot")
 					.data(points)
@@ -141,10 +148,15 @@ function scatterplot(container, data, trace, xattr, yattr) {
 					.on("mousedown", function(d, i) {
 						this.setAttribute('fill-opacity', "80%");
 						dragging = d;
+						path.attr('d', path_func(d))
+							.attr('fill', "none")
+							.attr("stroke", "blue")
+							.attr('stroke-width', 2);
 						d3.event.preventDefault();
 					})
 	d3.select("body").on("mouseup", function() {
 		dragging = null;
+		path.attr('d', '');
 		dots.each(function(d, i) {
 			this.setAttribute('fill-opacity', null);
 		})
