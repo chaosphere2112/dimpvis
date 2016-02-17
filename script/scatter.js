@@ -26,11 +26,16 @@ function scatterplot(container, data, trace, xattr, yattr) {
 			return previousValue > currentValue.length ? currentValue.length : previousValue;
 		}
 	}, null);
-	function update() {
+	function update(transition) {
 		var time;
-		dots.transition().delay(timetick / 2)
-			.attr("cx", function(d) { return x_scale(d[get_time()].x)})
-			.attr('cy', function(d) { return y_scale(d[get_time()].y)});
+		if (transition === undefined || transition === true) {
+			dots.transition().delay(timetick / 2)
+				.attr("cx", function(d) { return x_scale(d[get_time()].x)})
+				.attr('cy', function(d) { return y_scale(d[get_time()].y)});
+		} else {
+			dots.attr("cx", function(d) { return x_scale(d[get_time()].x)})
+				.attr('cy', function(d) { return y_scale(d[get_time()].y)});
+		}
 		
 		if (trace) {
 			var target = svg;
@@ -160,9 +165,7 @@ function scatterplot(container, data, trace, xattr, yattr) {
 		dots.each(function(d, i) {
 			this.setAttribute('fill-opacity', null);
 		})
-	});
-
-	svg.on("mousemove", function(d, i){
+	}).on("mousemove", function(d, i){
 			if (dragging === null) {
 				return;
 			}
@@ -188,8 +191,7 @@ function scatterplot(container, data, trace, xattr, yattr) {
 				}
 			}, null);
 			var closest_time = dragging.indexOf(closest_point);
-			console.log(closest_time);
 			set_time(closest_time);
-			update();
+			update(false);
 		});
 }
