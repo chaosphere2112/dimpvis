@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html>
 	<head>
+
+		<meta charset="utf-8">
+
+		<title>reveal.js – The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="lib/reveal.css">
+		<link rel="stylesheet" href="lib/black.css" id="theme">
+		<script src="lib/reveal.js"></script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	
 		<script type="text/javascript" src="data/points.json"></script>
 		<script type="text/javascript" src="lib/d3.min.js"></script>
 		<script type="text/javascript" src="script/scatter.js"></script>
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" type="text/css" href="script/scatter.css">
+
 		<style>
 			/*
 				Colors:
@@ -23,11 +43,35 @@
 				width: 250px;
 				margin-left:10%;
 			}
+			#viz {
+				background:white;
+			}
 		</style>
 	</head>
 	<body>
-		<div id="viz"></div>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1 style="text-transform: none;">DimpVis</h1>
+					<h3 style="text-transform: none;">Exploring Time-varying Information Visualizations by Direct Manipulation</h3>
+					<p>Paper by Brittany Kondo and Christopher Collins</p>
+					<p>Presentation by Sam Fries</p>
+				</section>
+				<section>
+					<div id="viz"></div>
+				</section>
+			</div>
+		</div>
 		<script type="text/javascript">
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+			});
 			scatterplot(d3.select("#viz"), points, false);
 		</script>
 	</body>
