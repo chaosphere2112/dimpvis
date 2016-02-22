@@ -42,8 +42,8 @@
 				width: 250px;
 				margin-left:10%;
 			}
-			#viz {
-				background:white;
+			.reveal h1 {
+				font-size:1.8em;
 			}
 		</style>
 	</head>
@@ -82,7 +82,6 @@
 					</ul>
 				</section>
 				<section>
-					<h1>The Problem</h1>
 					<div id="viz"></div>
 				</section>
 				<section>
@@ -106,16 +105,148 @@
 				</section>
 				<section>
 					<h1>Temporal Navigation</h1>
-					
+					<ul>
+						<li class="fragment">Temporal filters</li>
+						<li class="fragment">Small Multiples</li>
+						<li class="fragment">Animation</li>
+						<li class="fragment">Lenses</li>
+					</ul>
 				</section>
 				<section>
 					<h1>Direct Manipulation</h1>
+					<ul>
+						<li class="fragment">Should aim to reduce friction between user and task</li>
+						<li class="fragment">Instant feedback</li>
+						<li class="fragment">Adjacent</li>
+					</ul>
 				</section>
 				<section>
 					<h1>Object-Centric Interaction</h1>
+					<ul>
+						<li class="fragment">DimP &amp; DRAGON</li>
+						<li class="fragment">Drag-Cell</li>
+						<li class="fragment">Filtering, scaling</li>
+					</ul>
 				</section>
 				<section>
 					<h1>What would you say... you do here?</h1>
+					<p class="fragment">Direct object interaction for temporal navigation</p>
+				</section>
+				<section>
+					<div id="viz3"></div>
+				</section>
+				<section>
+					<h1>Design Goals</h1>
+					<ul>
+						<li class="fragment">Object-centric Navigation</li>
+						<li class="fragment">Navigation Flexibility</li>
+						<li class="fragment">Directness</li>
+						<li class="fragment">Interaction Consistency</li>
+						<li class="fragment">Minimal Visual Change</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Design Considerations</h1>
+					<ul>
+						<li class="fragment">Hint Path (Flashlight vs Timeline)
+							<span class="fragment fade-in"><img class="fragment fade-out" src="images/hint_path.png"></span>
+						</li>
+						<li class="fragment">Input Mechanisms (Touch vs Mouse)</li>
+						<li class="fragment">Repeat Values
+							<span class="fragment fade-in"><img class="fragment fade-out" src="images/time_loop.png" /></span>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Other Chart Types</h1>
+					<ul>
+						<li class="fragment">Bar <span class="fragment fade-in"><img class="fragment fade-out" src="images/bar.png"></span></li>
+						<li class="fragment">Pie <span class="fragment fade-in"><img class="fragment fade-out" src="images/pie.png"/></span></li>
+						<li class="fragment">Heatmap <span class="Fragment fade-in"><img class="fragment fade-out" src="images/heatmap.png" /></span></li>
+					</ul>
+				</section>
+				<section>
+					<h1>What good is it?</h1>
+					<ul>
+						<li class="fragment">Retrieve Value
+							<ul class="fragment"><li>When is point A at age=50 and height=5?</li></ul>
+						</li>
+						<li class="fragment">Comparison
+							<ul class="fragment"><li>When is point A’s age and height greater than point B's?</li></ul>
+						</li>
+						<li class="fragment">Characterize Distribution
+							<ul class="fragment"><li>After the age and height of point A have been increasing, find the first year when they are both decreasing.</li></ul>
+						</li>
+						<li class="fragment">Outlier Detection
+							<ul class="fragment"><li>Find the first year when point A is moving in the opposite direction of the other points.</li></ul>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h1>What good is it?</h1>
+					<p>Scatter Plot Times:</p>
+					<table>
+						<tr>
+							<th>Task</th>
+							<th>DimpVis</th>
+							<th>Slider</th>
+							<th>Small Multiples</th>
+						</tr>
+						<tr>
+							<td>Retrieve Value</td>
+							<td>~9 seconds</td>
+							<td>~11 seconds</td>
+							<td>~11 seconds</td>
+						</tr>
+						<tr>
+							<td>Comparison</td>
+							<td>~10 seconds</td>
+							<td>~11 seconds</td>
+							<td>~13 seconds</td>
+						</tr>
+						<tr>
+							<td>Characterize Distribution</td>
+							<td>~8 seconds</td>
+							<td>~9 seconds</td>
+							<td>~14 seconds</td>
+						</tr>
+						<tr>
+							<td>Outlier Detection</td>
+							<td>~11 seconds</td>
+							<td>~11 seconds</td>
+							<td>~25 seconds</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h1>What good is it?</h1>
+					<p>Bar Chart Times:</p>
+					<table>
+						<tr>
+							<th>Task</th>
+							<th>DimpVis</th>
+							<th>Slider</th>
+							<th>Small Multiples</th>
+						</tr>
+						<tr>
+							<td>Retrieve Value</td>
+							<td>~9.5 seconds</td>
+							<td>~10 seconds</td>
+							<td>~12 seconds</td>
+						</tr>
+						<tr>
+							<td>Comparison</td>
+							<td>~15.5 seconds</td>
+							<td>~16 seconds</td>
+							<td>~18 seconds</td>
+						</tr>
+						<tr>
+							<td>Characterize Distribution</td>
+							<td>~13 seconds</td>
+							<td>~12 seconds</td>
+							<td>~16 seconds</td>
+						</tr>
+					</table>
 				</section>
 			</div>
 		</div>
