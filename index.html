@@ -4,10 +4,9 @@
 
 		<meta charset="utf-8">
 
-		<title>reveal.js – The HTML Presentation Framework</title>
+		<title>DimpVis: Exploring Time-varying Information Visualizations by Direct Manipulation</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="author" content="Sam Fries">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -58,7 +57,65 @@
 					<p>Presentation by Sam Fries</p>
 				</section>
 				<section>
+					<h1>Time Changes All Things</h1>
+					<ul>
+						<li class="fragment">Many types of data vary over time</li>
+						<li class="fragment">Standard chart types frequently used</li>
+						<li class="fragment">Animation used to show the effects of time</li>
+						<li class="fragment">Divides attention between state and data</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Things Change All The Time</h1>
+					<ul>
+						<li class="fragment">Drag objects to change time</li>
+						<li class="fragment">Keep primary focus on data</li>
+						<li class="fragment">Display a path of all other values</li>
+					</ul>
+				</section>
+				<section>
+					<h1>It slices, it dices, it makes julienne fries</h1>
+					<ul>
+						<li class="fragment">Can be used in several ways</li>
+						<li class="fragment">Change position, size, or color</li>
+						<li class="fragment">Authors made demos for scatter, bar, pie, and heat map</li>
+					</ul>
+				</section>
+				<section>
+					<h1>The Problem</h1>
 					<div id="viz"></div>
+				</section>
+				<section>
+					<h1>Nothing new under the sun</h1>
+				</section>
+				<section>
+					<h1>Visualizing Temporal Trends</h1>
+					<ul>
+						<li class="fragment">
+							Trace Visualization
+							<ul>
+								<li class="fragment">Illustrates trends of points in time-varying scatterplots</li>
+							</ul>
+						</li>
+						<li class="fragment">Stacked Bands</li>
+					</ul>
+					<span class="fragment fade-in"><img class="fragment fade-out" src="images/tominski.png" /></span>
+				</section>
+				<section>
+					<div id="viz2"></div>
+				</section>
+				<section>
+					<h1>Temporal Navigation</h1>
+					
+				</section>
+				<section>
+					<h1>Direct Manipulation</h1>
+				</section>
+				<section>
+					<h1>Object-Centric Interaction</h1>
+				</section>
+				<section>
+					<h1>What would you say... you do here?</h1>
 				</section>
 			</div>
 		</div>
@@ -73,6 +130,8 @@
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
 			});
 			scatterplot(d3.select("#viz"), points, false);
+			scatterplot(d3.select("#viz2"), points, true);
+			scatterplot(d3.select("#viz3"), points, false);
 		</script>
 	</body>
 </html>
